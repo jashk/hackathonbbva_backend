@@ -52,33 +52,52 @@ class ProductController extends Controller
 
             $product->save();
             DB::commit();
-            return response()->json(["status" => true, "message" => "Solicitud registrada"]);
+            return response()->json(["status" => true, "message" => "Producto Agregado"]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
             return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
         }
     }
 
-    //TODO
+
     public function update(Request $request,$id){
         try {
             $data = $request->all();
             extract($data);
 
             DB::beginTransaction();
-            $product = new Product();
+            $product = Product::find($id);
             $product->name = $name;
             $product->price = $price;
             $product->merchant_id = $merchant_id;
 
             //Upload Image
-
-            $path = $request->file("picture")->store("products");
-            $product->imagen = $path;
+            //Y si no manda imagen?
+            if($request->file("picture")!=null){
+                $path = $request->file("picture")->store("products");
+                $product->imagen = $path;
+            }
 
             $product->save();
             DB::commit();
-            return response()->json(["status" => true, "message" => "Solicitud registrada"]);
+            return response()->json(["status" => true, "message" => "Producto Agregado"]);
+        } catch (\Exception $e) {
+            Log::debug($e->getMessage());
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+        }
+    }
+
+
+    public function delete(Request $request,$id){
+        try {
+            $data = $request->all();
+            extract($data);
+
+            DB::beginTransaction();
+            $product = Product::find($id);
+            $product->delete();
+            DB::commit();
+            return response()->json(["status" => true, "message" => "Producto Agregado"]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
             return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);

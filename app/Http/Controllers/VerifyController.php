@@ -62,10 +62,6 @@ class VerifyController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="successful operation",
-     *          @OA\MediaType(
-     *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/MerchantCollection")
-     *          )
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -82,6 +78,7 @@ class VerifyController extends Controller
             //$response = $authyApi->phoneVerificationStart($phone_number, $country_code, $via);
             $response = $authyApi->phoneVerificationStart($phone_number, $country_code, "sms");
             if ($response->ok()) {
+
                 return response()->json($response->message(), 200);
             } else {
                 return response()->json((array)$response->errors(), 400);
@@ -124,10 +121,6 @@ class VerifyController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="successful operation",
-     *          @OA\MediaType(
-     *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/MerchantCollection")
-     *          )
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -143,6 +136,7 @@ class VerifyController extends Controller
         if ($validator->passes()) {
             try {
                 $result = $authyApi->phoneVerificationCheck($phone_number, $country_code, $token);
+                //Checar respuesta y reaccionar
                 return response()->json($result, 200);
             } catch (Exception $e) {
                 $response=[];

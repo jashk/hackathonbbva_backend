@@ -163,14 +163,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MerchantCollection"
-                                }
-                            }
-                        }
+                        "description": "successful operation"
                     },
                     "400": {
                         "description": "Bad request"
@@ -216,14 +209,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MerchantCollection"
-                                }
-                            }
-                        }
+                        "description": "successful operation"
                     },
                     "400": {
                         "description": "Bad request"
