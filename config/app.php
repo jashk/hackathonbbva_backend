@@ -2,6 +2,7 @@
 
 return [
 
+    'authy_api_key' => env('API_KEY', ''),
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -159,7 +160,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\AuthyApiServiceProvider::class,
     ],
 
     /*
