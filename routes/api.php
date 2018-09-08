@@ -21,3 +21,15 @@ Route::prefix('verify/')->group(function () {
     Route::post('start', 'VerifyController@startVerification');
     Route::post('verify', 'VerifyController@verifyCode');
 });
+
+
+Route::get('/products', 'ProductController@list');
+Route::get('/products/{id}', 'ProductController@listByMerchant');
+
+Route::get('/product/{id}', 'ProductController@getProduct');
+Route::post('/product/add', 'ProductController@add');
+Route::post('/product/{id}/update', 'ProductController@update');
+Route::delete('/product/{id}', 'ProductController@delete');
+
+
+
