@@ -15,3 +15,9 @@ use Illuminate\Http\Request;
 
 Route::get('/merchants', 'MerchantController@list');
 Route::post('/merchants', 'MerchantController@add');
+
+
+Route::prefix('verify/')->group(function () {
+    Route::post('start', 'VerifyController@startVerification');
+    Route::post('verify', 'VerifyController@verifyCode');
+});

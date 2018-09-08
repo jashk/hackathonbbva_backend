@@ -14,7 +14,8 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000"
+            "url": "http://my-default-host.com",
+            "description": "L5 Swagger OpenApi dynamic host server"
         }
     ],
     "paths": {
