@@ -135,7 +135,8 @@
         "/api/verify/start": {
             "post": {
                 "tags": [
-                    "Merchants"
+                    "Merchants",
+                    "Verify"
                 ],
                 "summary": "Start Verify Process",
                 "description": "Inicia el proceso de verificacion del telefono",
@@ -152,6 +153,59 @@
                                     },
                                     "phone_number": {
                                         "description": "phone_number",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/verify/verify": {
+            "post": {
+                "tags": [
+                    "Merchants",
+                    "Verify"
+                ],
+                "summary": "Finish Verify Process",
+                "description": "Inicia el proceso de verificacion del telefono",
+                "operationId": "Confirms SMS Arrival",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "country code": {
+                                        "description": "country code",
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "description": "phone_number",
+                                        "type": "string"
+                                    },
+                                    "token": {
+                                        "description": "token",
                                         "type": "string"
                                     }
                                 },

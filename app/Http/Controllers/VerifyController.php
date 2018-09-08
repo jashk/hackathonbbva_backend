@@ -38,7 +38,7 @@ class VerifyController extends Controller
      * @OA\Post(
      *      path="/api/verify/start",
      *      operationId="start Phone Verify",
-     *      tags={"Merchants"},
+     *      tags={"Merchants","Verify"},
      *      summary="Start Verify Process",
      *      description="Inicia el proceso de verificacion del telefono",
      *      @OA\RequestBody(
@@ -90,6 +90,49 @@ class VerifyController extends Controller
         return response()->json(['errors'=>$validator->errors()], 403);
     }
 
+
+    /**
+     * @OA\Post(
+     *      path="/api/verify/verify",
+     *      operationId="Confirms SMS Arrival",
+     *      tags={"Merchants","Verify"},
+     *      summary="Finish Verify Process",
+     *      description="Inicia el proceso de verificacion del telefono",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      description="country code",
+     *                      property="country code",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="phone_number",
+     *                      property="phone_number",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="token",
+     *                      property="token",
+     *                      type="string"
+     *                  )
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/MerchantCollection")
+     *          )
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found")
+     * )
+     */
     protected function verifyCode(
         Request $request,
         AuthyApi $authyApi
