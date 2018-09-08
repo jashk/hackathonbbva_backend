@@ -19,7 +19,7 @@ class VerifyController extends Controller
         return Validator::make($data, [
             'country_code' => 'required|string|max:3',
             'phone_number' => 'required|string|max:10',
-            'via' => 'required|string|max:4',
+            //'via' => 'required|string|max:4',
         ]);
     }
 
@@ -32,6 +32,45 @@ class VerifyController extends Controller
         ]);
     }
 
+
+
+    /**
+     * @OA\Post(
+     *      path="/api/verify/start",
+     *      operationId="start Phone Verify",
+     *      tags={"Merchants"},
+     *      summary="Start Verify Process",
+     *      description="Inicia el proceso de verificacion del telefono",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      description="country code",
+     *                      property="country code",
+     *                      type="string"
+     *                  ),
+*                       @OA\Property(
+     *                      description="phone_number",
+     *                      property="phone_number",
+     *                      type="string"
+     *                  )
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/MerchantCollection")
+     *          )
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found")
+     * )
+     */
     protected function startVerification(
         Request $request,
         AuthyApi $authyApi
@@ -40,7 +79,8 @@ class VerifyController extends Controller
         $validator = $this->verificationRequestValidator($data);
         extract($data);
         if ($validator->passes()) {
-            $response = $authyApi->phoneVerificationStart($phone_number, $country_code, $via);
+            //$response = $authyApi->phoneVerificationStart($phone_number, $country_code, $via);
+            $response = $authyApi->phoneVerificationStart($phone_number, $country_code, "sms");
             if ($response->ok()) {
                 return response()->json($response->message(), 200);
             } else {

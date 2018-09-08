@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://my-default-host.com",
+            "url": "http://api.bbvah.com",
             "description": "L5 Swagger OpenApi dynamic host server"
         }
     ],
@@ -122,6 +122,54 @@
                 "responses": {
                     "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/verify/start": {
+            "post": {
+                "tags": [
+                    "Merchants"
+                ],
+                "summary": "Start Verify Process",
+                "description": "Inicia el proceso de verificacion del telefono",
+                "operationId": "start Phone Verify",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "country code": {
+                                        "description": "country code",
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "description": "phone_number",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantCollection"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request"

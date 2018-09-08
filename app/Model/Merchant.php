@@ -26,14 +26,13 @@ class Merchant extends Model
 {
     /**
      * The table associated with the model.
-     *
+     * 
      * @var string
      */
-    protected $table = 'merchant';
-    /**
+    protected $table = 'Merchant';
 
-     *
-     * @var integer
+    /**
+     * @var array
      */
     protected $fillable = ['muid', 'firts_name', 'last_name', 'phone', 'business_social_name', 'business_social_rfc', 'business_social_address', 'business_social_address_lat', 'business_social_address_lng', 'business_start', 'business_end', 'approved', 'status', 'created_at', 'updated_at'];
 
