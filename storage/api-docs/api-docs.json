@@ -1,0 +1,161 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "L5 OpenApi",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "greencode@programming4food.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/merchants": {
+            "get": {
+                "tags": [
+                    "Merchants"
+                ],
+                "summary": "Get List Of Merchants",
+                "description": "Regresa el listado de merchants para  ser consultado por el ejecutivo",
+                "operationId": "getListMerchants",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/merchants": {
+            "post": {
+                "tags": [
+                    "Merchants"
+                ],
+                "summary": "Add Merchant",
+                "description": "Agrega un nuevo merchant",
+                "operationId": "postAddMerchant",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/merchants/{id}/approvals": {
+            "post": {
+                "tags": [
+                    "Merchants"
+                ],
+                "summary": "Approval / Reject Merchant",
+                "description": "Acepta o rechaza un merchant",
+                "operationId": "postMerchantApproval",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Merchant id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/merchants/{id}/qr": {
+            "post": {
+                "tags": [
+                    "Merchants"
+                ],
+                "summary": "Get Merchant QR",
+                "description": "Returns qr data",
+                "operationId": "getMerchantQR",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Merchant id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Merchant": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "MerchantCollection": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
