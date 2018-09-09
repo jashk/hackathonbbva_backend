@@ -41,11 +41,59 @@ class MerchantController extends Controller
     }
     /**
      * @OA\Post(
-     *      path="/merchants",
+     *      path="/api/merchants",
      *      operationId="postAddMerchant",
      *      tags={"Merchants"},
      *      summary="Add Merchant",
      *      description="Agrega un nuevo merchant",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      description="Name",
+     *                      property="name",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="Lastname",
+     *                      property="lastname",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="Phone",
+     *                      property="phone",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="Business Name",
+     *                      property="business_name",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="RFC",
+     *                      property="rfc",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="Business Address",
+     *                      property="business_address",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="starts_at",
+     *                      property="starts_at",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      description="Ends At",
+     *                      property="ends_at",
+     *                      type="string"
+     *                  ),
+     *              )
+     *          )
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="successful operation"
@@ -67,6 +115,8 @@ class MerchantController extends Controller
             $merchant->business_social_address = $request->business_address;
             // $merchant->business_social_address_lat = $request->lat;
             // $merchant->business_social_address_lng = $request->lng;
+            $merchant->approved = 0;   //Correccion
+            $merchant->status = 0;  //Correccion
             $merchant->business_start = $request->starts_at;
             $merchant->business_end = $request->ends_at;
             $merchant->save();
@@ -79,7 +129,7 @@ class MerchantController extends Controller
     }
     /**
      * @OA\Post(
-     *      path="/merchants/{id}/approvals",
+     *      path="/api/merchants/{id}/approvals",
      *      operationId="postMerchantApproval",
      *      tags={"Merchants"},
      *      summary="Approval / Reject Merchant",
@@ -91,6 +141,19 @@ class MerchantController extends Controller
      *          in="path",
      *          @OA\Schema(
      *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      description="Approved",
+     *                      property="approved",
+     *                      type="integer"
+     *                  ),
+     *              )
      *          )
      *      ),
      *      @OA\Response(
@@ -116,7 +179,7 @@ class MerchantController extends Controller
     }
     /**
      * @OA\Post(
-     *      path="/merchants/{id}/qr",
+     *      path="/api/merchants/{id}/qr",
      *      operationId="getMerchantQR",
      *      tags={"Merchants"},
      *      summary="Get Merchant QR",
@@ -128,6 +191,19 @@ class MerchantController extends Controller
      *          in="path",
      *          @OA\Schema(
      *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      description="Approved",
+     *                      property="approved",
+     *                      type="integer"
+     *                  ),
+     *              )
      *          )
      *      ),
      *      @OA\Response(
