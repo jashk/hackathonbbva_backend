@@ -356,6 +356,77 @@
                 }
             }
         },
+        "/api/code/generate": {
+            "get": {
+                "tags": [
+                    "QR"
+                ],
+                "summary": "Get the QR code",
+                "description": "Genera un QR",
+                "operationId": "generateQR",
+                "parameters": [
+                    {
+                        "name": "alias",
+                        "in": "query",
+                        "description": "Alias",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "account",
+                        "in": "query",
+                        "description": "Acount",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "account_type",
+                        "in": "query",
+                        "description": "Account Type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "reference",
+                        "in": "query",
+                        "description": "Reference",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "account_holder_name",
+                        "in": "query",
+                        "description": "Account Holder Name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "amount",
+                        "in": "query",
+                        "description": "Amount",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/verify/start": {
             "post": {
                 "tags": [

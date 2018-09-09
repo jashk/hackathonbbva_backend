@@ -16,8 +16,71 @@ class QRController extends Controller
     static $ACCOUNT_TYPES = ['DEBIT_CARD' => 'TD', 'CREDIT_CARD' => 'TC', 'CLABE' => 'CL'];
 
 
+    /**
+     * @OA\Get(
+     *      path="/api/code/generate",
+     *      operationId="generateQR",
+     *      tags={"QR"},
+     *      summary="Get the QR code",
+     *      description="Genera un QR",
+     *      @OA\Parameter(
+     *          name="alias",
+     *          description="Alias",
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="account",
+     *          description="Acount",
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="account_type",
+     *          description="Account Type",
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="reference",
+     *          description="Reference",
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="account_holder_name",
+     *          description="Account Holder Name",
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="amount",
+     *          description="Amount",
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found")
+     * )
+     */
     public function generate(Request $request) {
-
+      
         $trans = $request->all();
 
         $validator = Validator::make($request->all(), [
