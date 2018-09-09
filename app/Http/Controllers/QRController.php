@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Endroid\QrCode\QrCode;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class QRController extends Controller
 {
@@ -80,16 +82,17 @@ class QRController extends Controller
      * )
      */
     public function generate(Request $request) {
-      
+
         $trans = $request->all();
 
         $validator = Validator::make($request->all(), [
-            'alias' => 'string',
+            'alias' => '',
             'account' => 'required|string',
             'account_type' => 'required|string',
-            'reference' => 'string',
+            'reference' => '',
             'account_holder_name' => 'required|string',
-            'amount' => 'string',
+            'amount' => '',
+            'url' => ''
         ]);
 
         if ($validator->fails()) {
@@ -151,8 +154,16 @@ class QRController extends Controller
         $tras_string = json_encode($layout);
         $qrCode = new QrCode($tras_string);
 
-        return response($qrCode->writeString())
+        if(isset($trans['url']) && $trans['url'] == 'true'){
+            $path = Storage::disk('public')->path('/') . '/qr';
+            File::makeDirectory($path, $mode = 0777, true, true);
+            $filename = str_random(10) . '-qrcode.png';
+            $qrCode->writeFile(Storage::disk('public')->path('qr'). '/' . $filename);
+            return asset('storage/qr/' . $filename);
+        }else{
+            return response($qrCode->writeString())
               ->header('Content-Type', $qrCode->getContentType());
+        }
     }
 
 }
