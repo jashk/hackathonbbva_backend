@@ -155,11 +155,10 @@ class QRController extends Controller
         $qrCode = new QrCode($tras_string);
 
         if(isset($trans['url']) && $trans['url'] == 'true'){
-            $path = Storage::disk('public')->path('/') . '/qr';
-            File::makeDirectory($path, $mode = 0777, true, true);
+            $path = Storage::disk('public_uploads')->path('/');
             $filename = str_random(10) . '-qrcode.png';
-            $qrCode->writeFile(Storage::disk('public')->path('qr'). '/' . $filename);
-            return asset('storage/qr/' . $filename);
+            $qrCode->writeFile($path . '/' . $filename);
+            return Storage::disk('public_uploads')->url($filename);
         }else{
             return response($qrCode->writeString())
               ->header('Content-Type', $qrCode->getContentType());
