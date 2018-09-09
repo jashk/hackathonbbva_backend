@@ -31,5 +31,7 @@ Route::post('/product/add', 'ProductController@add');
 Route::post('/product/{id}/update', 'ProductController@update');
 Route::delete('/product/{id}', 'ProductController@delete');
 
+Route::get('/code/generate', 'QRController@generate');
+
 
 
