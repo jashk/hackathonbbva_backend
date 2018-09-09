@@ -84,6 +84,7 @@ class QRController extends Controller
      */
     public function generate(Request $request) {
 
+<<<<<<< Updated upstream
         $trans = $request->all();
         // $request->validate([
         //     'alias' => 'string|max:100',
@@ -98,6 +99,21 @@ class QRController extends Controller
 
         if(!in_array($trans['account_type'], array_keys(self::$ACCOUNT_TYPES))){
             return response()->json(["status" => false, "error" => "El tipo de cuenta no es soportado"], 400);
+=======
+        $trans = $request->validate([
+            'alias' => ['string','min:3', 'max:100', 'regex:/(^([a-zA-Z])?$)/u'],
+            'account' => 'required|string|min:10|max:20',
+            'account_type' => 'required|string',
+            'reference' => 'string|min:6:max:7',
+            'account_holder_name' => 'required|string|min:3|max:20',
+            'amount' => 'string|max:100',
+        ]);
+
+        if(!in_array($trans['account_type'],ACCOUNT_TYPES)){
+           trow  \Illuminate\Validation\ValidationException::withMessages([
+               'account_type' => ['El tipo de cuenta no es soportado'],
+            ]);
+>>>>>>> Stashed changes
         }
 
         if(!empty($trans['amount'])){
