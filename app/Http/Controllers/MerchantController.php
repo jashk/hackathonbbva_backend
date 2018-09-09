@@ -36,7 +36,7 @@ class MerchantController extends Controller
             return response()->json(["status" => true, "data" => $merchants]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas","message"=>$e->getMessage()], 500);
         }
     }
     /**
@@ -174,7 +174,7 @@ class MerchantController extends Controller
             return response()->json(["status" => true, "message" => $request->approved ? "Aprobado" : "Rechazado"]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas", "message"=>$e->getMessage()], 500);
         }
     }
     /**
@@ -224,7 +224,7 @@ class MerchantController extends Controller
             return response()->json(["status" => true, "message" => $request->approved ? "Aprobado" : "Rechazado"]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas","message"=>$e->getMessage()], 500);
         }
     }
 }
