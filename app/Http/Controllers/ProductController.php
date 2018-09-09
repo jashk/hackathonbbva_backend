@@ -167,7 +167,7 @@ class ProductController extends Controller
 
             //Upload Image
 
-            $path = $request->file("picture")->store("products");
+            $path = $request->file("picture")->store( "",['disk' => 'public_uploads']);
             $product->imagen = $path;
 
             $product->save();
@@ -245,7 +245,7 @@ class ProductController extends Controller
             //Upload Image
             //Y si no manda imagen?
             if($request->file("picture")!=null){
-                $path = $request->file("picture")->store("products");
+                $path = $request->file("picture")->store("",['disk' => 'public_uploads']);
                 $product->imagen = $path;
             }
 

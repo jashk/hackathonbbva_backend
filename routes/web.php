@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('file/{filename}', function ($filename) {
+    //dd(Storage::get($filename));
+    return Storage::url($filename);
+
+    //return response()->download(, null, [], null);
+})->where('filename', '^(.+)\/([^\/]+)$');
