@@ -13,7 +13,7 @@ class CreateProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('name', 100)->comment('Nombre del producto');
             $table->string('imagen', 100)->comment('Imagen del producto');
@@ -24,7 +24,7 @@ class CreateProductTable extends Migration
             $table->foreign('merchant_id')->references('id')->on('merchant');
         });
 
-        Schema::table('producto',function (Blueprint $table){
+        Schema::table('products',function (Blueprint $table){
 
         });
     }

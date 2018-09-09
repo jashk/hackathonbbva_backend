@@ -45,9 +45,7 @@
                         "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/merchants": {
+            },
             "post": {
                 "tags": [
                     "Merchants"
@@ -55,6 +53,50 @@
                 "summary": "Add Merchant",
                 "description": "Agrega un nuevo merchant",
                 "operationId": "postAddMerchant",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Name",
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "description": "Lastname",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "Phone",
+                                        "type": "string"
+                                    },
+                                    "business_name": {
+                                        "description": "Business Name",
+                                        "type": "string"
+                                    },
+                                    "rfc": {
+                                        "description": "RFC",
+                                        "type": "string"
+                                    },
+                                    "business_address": {
+                                        "description": "Business Address",
+                                        "type": "string"
+                                    },
+                                    "starts_at": {
+                                        "description": "starts_at",
+                                        "type": "string"
+                                    },
+                                    "ends_at": {
+                                        "description": "Ends At",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -68,7 +110,7 @@
                 }
             }
         },
-        "/merchants/{id}/approvals": {
+        "/api/merchants/{id}/approvals": {
             "post": {
                 "tags": [
                     "Merchants"
@@ -87,6 +129,22 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "approved": {
+                                        "description": "Approved",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -100,7 +158,7 @@
                 }
             }
         },
-        "/merchants/{id}/qr": {
+        "/api/merchants/{id}/qr": {
             "post": {
                 "tags": [
                     "Merchants"
@@ -119,6 +177,22 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "approved": {
+                                        "description": "Approved",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "successful operation"

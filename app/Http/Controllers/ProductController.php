@@ -35,7 +35,7 @@ class ProductController extends Controller
             return response()->json(["status" => true, "data" => $products]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas","message"=>$e->getMessage()], 500);
         }
     }
 
@@ -71,7 +71,7 @@ class ProductController extends Controller
             return response()->json(["status" => true, "data" => $products]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas","message"=>$e->getMessage()], 500);
         }
     }
 
@@ -107,7 +107,7 @@ class ProductController extends Controller
             return response()->json(["status" => true, "data" => $products]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas","message"=>$e->getMessage()], 500);
         }
     }
 
@@ -167,7 +167,7 @@ class ProductController extends Controller
 
             //Upload Image
 
-            $path = $request->file("picture")->store("products");
+            $path = $request->file("picture")->store( "",['disk' => 'public_uploads']);
             $product->imagen = $path;
 
             $product->save();
@@ -175,7 +175,7 @@ class ProductController extends Controller
             return response()->json(["status" => true, "message" => "Producto Agregado"]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas","message"=>$e->getMessage()], 500);
         }
     }
 
@@ -245,7 +245,7 @@ class ProductController extends Controller
             //Upload Image
             //Y si no manda imagen?
             if($request->file("picture")!=null){
-                $path = $request->file("picture")->store("products");
+                $path = $request->file("picture")->store("",['disk' => 'public_uploads']);
                 $product->imagen = $path;
             }
 
@@ -254,7 +254,7 @@ class ProductController extends Controller
             return response()->json(["status" => true, "message" => "Producto Corregido"]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas","message"=>$e->getMessage()], 500);
         }
     }
 
@@ -295,7 +295,7 @@ class ProductController extends Controller
             return response()->json(["status" => true, "message" => "Producto Agregado"]);
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas","message"=>$e->getMessage()], 500);
         }
     }
 
