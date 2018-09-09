@@ -103,7 +103,7 @@ class MerchantController extends Controller
      * )
      */
     public function add(Request $request) {
-        try {
+        //try {
             DB::beginTransaction();
             $merchant = new Merchant();
             $merchant->muid = uniqid();
@@ -122,10 +122,10 @@ class MerchantController extends Controller
             $merchant->save();
             DB::commit();
             return response()->json(["status" => true, "message" => "Solicitud registrada"]);
-        } catch (\Exception $e) {
-            Log::debug($e->getMessage());
-            return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
-        }
+        //} catch (\Exception $e) {
+        //    Log::debug($e->getMessage());
+        //    return response()->json(["status" => false, "error" => "Ocurrio un error interno, vuelva a internar o comuniquese a sistemas"], 500);
+        //}
     }
     /**
      * @OA\Post(
